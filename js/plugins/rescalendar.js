@@ -58,6 +58,8 @@
 			var year = myyear;
 			var month = mymonth;
 			var firstDay = new Date(year, month, 1);
+			var datenow = new Date();
+				datenow =  datenow.toISOString().substring(0, 10);
 			var startingDay = firstDay.getDay();
 			  
 			// find number of days in month
@@ -90,13 +92,27 @@
 			// this loop is for is weeks (rows)
 			for (var i = 0; i < 9; i++) {
 			    // this loop is for weekdays (cells)
-			    for (var j = 0; j <= 6; j++) { 
-			      html += '<td class="calendar-day">';
-			      if (day <= monthLength && (i > 0 || j >= startingDay)) {
-			        html += day;
-			        day++;
-			      }
-			      html += '</td>';
+			    for (var j = 0; j <= 6; j++) 
+			    { 
+			    	var mydate = false;
+			      	if (day <= monthLength && (i > 0 || j >= startingDay)) 
+			      	{
+			      		mydate = new Date(year+'-'+(month + 1)+'-'+day);
+			      		mydate = mydate.toISOString().substring(0, 10);
+			      	}
+			      	
+			      	var selecteddate = '';
+			      	if(datenow === mydate)
+			      	{
+			      		  selecteddate = 'selected';
+			      	}
+			      	html += '<td class="calendar-day '+selecteddate+'">';
+			      	if (day <= monthLength && (i > 0 || j >= startingDay)) 
+			      	{
+			        	html += day;
+			        	day++;
+			      	}
+			      	html += '</td>';
 			    }
 			    // stop making rows if we've run out of days
 			    if (day > monthLength) {
