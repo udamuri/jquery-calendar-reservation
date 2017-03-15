@@ -59,7 +59,7 @@
 			var month = mymonth;
 			var firstDay = new Date(year, month, 1);
 			var datenow = new Date();
-				datenow =  datenow.toISOString().substring(0, 10);
+				datenow =  dateFormat(datenow);
 			var startingDay = firstDay.getDay();
 			  
 			// find number of days in month
@@ -74,7 +74,7 @@
 			  
 			// do the header
 			var monthName = cal_months_labels[month]
-			var html = '<div class="col-md-4 col-sm-12 col-xs-12">';
+			var html = '<div class="rescalendar col-md-4 col-sm-12 col-xs-12">';
 				html += '<table class="calendar-table">';
 				html += '<tr class="calendar-header-my"><th colspan="7">';
 				html +=  monthName + "&nbsp;" + year;
@@ -98,9 +98,9 @@
 			      	if (day <= monthLength && (i > 0 || j >= startingDay)) 
 			      	{
 			      		mydate = new Date(year+'-'+(month + 1)+'-'+day);
-			      		mydate = mydate.toISOString().substring(0, 10);
+			      		mydate = dateFormat(mydate);
 			      	}
-			      	
+
 			      	var selecteddate = '';
 			      	if(datenow === mydate)
 			      	{
@@ -144,6 +144,15 @@
 			}
 
 			return arrData;
+		}
+
+		function dateFormat(date)
+		{
+			var year = date.getFullYear();
+			var month = date.getMonth();
+			var date = date.getDate();
+
+			return year+"-"+month+"-"+date;
 		}
 	};
 }( jQuery ));
