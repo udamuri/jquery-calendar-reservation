@@ -29,9 +29,9 @@
 				}	
 			}
   			var year  = (isNaN(settings.year) || settings.year == null || settings.year == undefined) ? cal_cur_date.getFullYear() : settings.year;
-
   			var countmonth = month12(month, year);
 			var html = '<div class="row">';
+
   			if(typeof countmonth == 'object')
   			{
   				for(var i=0;i<countmonth.length;i++)
@@ -94,11 +94,14 @@
 			    // this loop is for weekdays (cells)
 			    for (var j = 0; j <= 6; j++) 
 			    { 
+
 			    	var mydate = false;
+			    	var blockdate = '';
 			      	if (day <= monthLength && (i > 0 || j >= startingDay)) 
 			      	{
 			      		mydate = new Date(year+'-'+(month + 1)+'-'+day);
 			      		mydate = dateFormat(mydate);
+			      		blockdate = parseDate(settings.blockdate, mydate);
 			      	}
 
 			      	var selecteddate = '';
@@ -154,5 +157,25 @@
 
 			return year+"-"+month+"-"+date;
 		}
+
+		function parseDate(arrData, checkDateNow)
+		{
+			if(typeof arrData == 'object')
+			{
+				if(arrData.length > 0)
+				{
+					for(var i=0;i<arrData.length;i++)
+					{
+						var start = new Date(arrData[i][0]).getTime();
+						var end = new Date(arrData[i][1]).getTime();
+						var type = arrData[i][2];
+						console.log(start + '-----' +end)
+					}
+				}
+			}
+
+			return false;
+		}
+
 	};
 }( jQuery ));
