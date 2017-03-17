@@ -30,7 +30,8 @@
 			}
   			var year  = (isNaN(settings.year) || settings.year == null || settings.year == undefined) ? cal_cur_date.getFullYear() : settings.year;
   			var countmonth = month12(month, year);
-			var html = '<div class="row">';
+  			var html = '<div class="row"><div class="col-md-12 text-center"><button class="btn btn-default" type="submit"><span aria-hidden="true">&laquo;</span> Prev</button> <button class="btn btn-default" type="submit">Next <span aria-hidden="true">&raquo;</span></button></div></div>';
+				html += '<div class="row">';
 
   			if(typeof countmonth == 'object')
   			{
@@ -47,7 +48,7 @@
   			}
 
   			html += '</div>';
-
+  	
 			obj.html(html);
 		});
 
@@ -101,7 +102,22 @@
 			      	{
 			      		mydate = new Date(year+'-'+(month + 1)+'-'+day);
 			      		mydate = dateFormat(mydate);
-			      		blockdate = parseDate(settings.blockdate, mydate);
+			      		var dnowcl = year+'-'+(month + 1)+'-'+day ;
+			      		blockdate = parseDate(settings.blockdate, dnowcl);
+			      	}
+
+			      	var class_active = '';
+			      	if(blockdate == 'start')
+			      	{
+			      		class_active = 'startdate';
+			      	}
+			      	else if(blockdate == 'end')
+			      	{
+			      		class_active = 'enddate';
+			      	}
+			      	else if(blockdate == 'middle')
+			      	{
+			      		class_active = 'middledate';
 			      	}
 
 			      	var selecteddate = '';
@@ -109,7 +125,7 @@
 			      	{
 			      		  selecteddate = 'selected';
 			      	}
-			      	html += '<td class="calendar-day '+selecteddate+'">';
+			      	html += '<td class="calendar-day '+selecteddate+' '+class_active+'">';
 			      	if (day <= monthLength && (i > 0 || j >= startingDay)) 
 			      	{
 			        	html += day;
@@ -160,8 +176,11 @@
 
 		function parseDate(arrData, checkDateNow)
 		{
+			var value = '';
 			if(typeof arrData == 'object')
 			{
+				var dnow = new Date(checkDateNow).getTime();
+				
 				if(arrData.length > 0)
 				{
 					for(var i=0;i<arrData.length;i++)
@@ -169,7 +188,22 @@
 						var start = new Date(arrData[i][0]).getTime();
 						var end = new Date(arrData[i][1]).getTime();
 						var type = arrData[i][2];
-						console.log(start + '-----' +end)
+						if(dnow >= start && dnow <= end)
+						{
+							if(dnow == start)
+							{
+								return 'start';
+							}
+							else if(dnow == end)
+							{
+								return 'end';
+							}
+							else
+							{
+								return 'middle';
+							}
+							
+						}
 					}
 				}
 			}

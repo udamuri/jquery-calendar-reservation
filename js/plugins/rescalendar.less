@@ -1,7 +1,15 @@
 @midi:  ~"(max-width: 767px)";
-
+@white : #FFF;
+@blackx : #444;
+@blackg : #222;
+@headerday : #FF6140;
+@headermonth : #1B363F;
+@border : #ccc;
+@transt : rgba(232,232,232,0);
+@block-light:   lighten(@headerday, 29%);
+@block-text:   #750000;
 table.calendar-table {
-  background: #fff;
+  background-color: @white;
   border-collapse: collapse;
   color: #222;
   font-family: 'PT Sans', sans-serif;
@@ -9,38 +17,68 @@ table.calendar-table {
   width: 100%;
 
   	th, td  {
-	  border: 1px solid #ccc;
-	  color: #444;
+	  border: 1px solid @border;
+	  color: @blackx;
 	  line-height: 22px;
 	  text-align: center;
 	}
 
 	tr:first-child td {
-	  color: #222;
+	  color: @blackg;
 	  font-weight: 700;
 	}
 
 	tr.calendar-header-my
 	{
 		th {
-			background-color: #1B363F;
-			color: #fff;
+			background-color: @headermonth;
+			color: @white;
 		}
 	}
 
 	tr.calendar-header
 	{
 		td {
-			background-color: #FF6140;
-			color: #fff;
+			background-color: @headerday;
+			color: @white;
 			width: 14.28571428571429%;
 		}
 	}
 
 	.selected {
-	  background: #FF6140;
+	  background: @headerday;
 	  border: 0;
-	  color: #fff;
+	  color: @white;
+	}
+
+	.startdate 
+	{
+		background: @block-light; /* For browsers that do not support gradients */
+		font-weight: bold;
+		color: @block-text;
+	    background: -webkit-linear-gradient(to right bottom, @transt 50%, @block-light 50%); /* For Safari 5.1 to 6.0 */
+	    background: -o-linear-gradient(to right bottom, @transt 50%, @block-light 50%); /* For Opera 11.1 to 12.0 */
+	    background: -moz-linear-gradient(to right bottom, @transt 50%, @block-light 50%); /* For Firefox 3.6 to 15 */
+		background: linear-gradient(to right bottom, @transt 50%, @block-light 50%);/* Standard syntax */
+	}
+
+	.enddate
+	{
+		background: @block-light; /* For browsers that do not support gradients */
+		font-weight: bold;
+		color: @block-text;
+		background: -webkit-linear-gradient(to right bottom, @block-light 50%, @transt 50%); /* For Safari 5.1 to 6.0 */
+	    background: -o-linear-gradient(to right bottom, @block-light 50%, @transt 50%); /* For Opera 11.1 to 12.0 */
+	    background: -moz-linear-gradient(to right bottom, @block-light 50%, @transt 50%); /* For Firefox 3.6 to 15 */
+		background: linear-gradient(to right bottom, @block-light 50%, @transt 50%);
+	}
+
+	.middledate
+	{
+		color: @block-text;
+		font-weight: bold;
+		background: @block-light; /* For browsers that do not support gradients */
+		text-decoration: line-through;
 	}
 
 
@@ -60,22 +98,4 @@ table.calendar-table {
 	@media @midi {
 		margin-bottom: 20px;
 	}	
-}
-
-.startdate 
-{
-	background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(to right bottom, rgba(232,232,232,0) 50%, red 50%); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(to right bottom, rgba(232,232,232,0) 50%, red 50%); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(to right bottom, rgba(232,232,232,0) 50%, red 50%); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right bottom, rgba(232,232,232,0) 50%, red 50%);/* Standard syntax */
-}
-
-.enddate
-{
-	background: red; /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(to right bottom, red 50%, rgba(232,232,232,0) 50%); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(to right bottom, red 50%, rgba(232,232,232,0) 50%); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(to right bottom, red 50%, rgba(232,232,232,0) 50%); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right bottom, red 50%, rgba(232,232,232,0) 50%);
 }
