@@ -30,7 +30,8 @@
 			}
   			var year  = (isNaN(settings.year) || settings.year == null || settings.year == undefined) ? cal_cur_date.getFullYear() : settings.year;
   			var countmonth = month12(month, year);
-  			var html = '<div class="row"><div class="col-md-12 text-center"><button class="btn btn-default" type="submit"><span aria-hidden="true">&laquo;</span> Prev</button> <button class="btn btn-default" type="submit">Next <span aria-hidden="true">&raquo;</span></button></div></div>';
+
+  			var html = '<div class="row rowmargin"><div class="col-md-12 text-center"><button class="btn btn-default" type="submit"><span aria-hidden="true">&laquo;</span> Prev</button> <button class="btn btn-default" type="submit">Next <span aria-hidden="true">&raquo;</span></button></div></div>';
 				html += '<div class="row">';
 
   			if(typeof countmonth == 'object')
@@ -183,6 +184,8 @@
 				
 				if(arrData.length > 0)
 				{
+					var status = false;
+					var overlap = 0;
 					for(var i=0;i<arrData.length;i++)
 					{
 						var start = new Date(arrData[i][0]).getTime();
@@ -190,25 +193,31 @@
 						var type = arrData[i][2];
 						if(dnow >= start && dnow <= end)
 						{
+							overlap++;
 							if(dnow == start)
 							{
-								return 'start';
+								status = 'start';
 							}
 							else if(dnow == end)
 							{
-								return 'end';
+								status = 'end';
 							}
 							else
 							{
-								return 'middle';
+								status = 'middle';
 							}
 							
 						}
 					}
+
+					if(overlap > 1)
+					{
+						status = 'middle';	
+					}
 				}
 			}
 
-			return false;
+			return status;
 		}
 
 	};
