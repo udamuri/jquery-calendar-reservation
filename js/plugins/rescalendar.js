@@ -31,7 +31,10 @@
   			var year  = (isNaN(settings.year) || settings.year == null || settings.year == undefined) ? cal_cur_date.getFullYear() : settings.year;
   			var countmonth = month12(month, year);
 
-  			var html = '<div class="row rowmargin"><div class="col-md-12 text-center"><button class="btn btn-default" type="submit"><span aria-hidden="true">&laquo;</span> Prev</button> <button class="btn btn-default" type="submit">Next <span aria-hidden="true">&raquo;</span></button></div></div>';
+  			var html  = '<div class="row rowmargin"><div class="col-md-12 text-center">';
+				html += '<button class="btn btn-default" data-prev="" type="submit"><span aria-hidden="true">&laquo;</span> Prev</button>&nbsp; ';
+				html += '<button class="btn btn-default" data-next="" type="submit">Next <span aria-hidden="true">&raquo;</span></button>';
+				html += '</div></div>';
 				html += '<div class="row">';
 
   			if(typeof countmonth == 'object')
